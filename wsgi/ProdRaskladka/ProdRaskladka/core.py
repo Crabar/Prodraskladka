@@ -11,7 +11,7 @@ from .models import *
 from random import choice
 
 def generate_day_plan(people_count):
-    breakfast = {} #choice(Dish.objects(type__contains="breakfast").all())
+    breakfast = choice(Dish.objects(type__contains="breakfast").all())
     lunch = {} #choice(Dish.objects(type__contains="lunch").all())
     dinner = choice(Dish.objects(type__contains="dinner").all())
     res = DayPlan(breakfast, lunch, dinner)

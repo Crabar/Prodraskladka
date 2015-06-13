@@ -18,4 +18,4 @@ def generate(request):
         return render(request, 'index.html', {'error_message': "You didn't provide all necessary information!"})
 
     plan = generate_plan(days_count, people_count)
-    return render(request, "index.html", {"plan": plan})
+    return render(request, "index.html", {"plan": plan, "peopleCount": people_count, "daysCount": days_count})

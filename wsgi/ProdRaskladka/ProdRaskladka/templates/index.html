@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap 3, from LayoutIt!</title>
+    <title>Генератор продраскладки</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -40,18 +40,20 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <h3>
-                Trekking food plan generator
+                Генератор продраскладки
             </h3>
 
             <form role="form" action="{% url 'generate' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="peopleCount">Number of people:</label><input type="number" class="form-control"
-                                                                             id="peopleCount" name="peopleCount">
+                    <label for="peopleCount">Кол-во людей:</label><input type="number" class="form-control"
+                                                                         id="peopleCount" name="peopleCount"
+                                                                         value="{{ peopleCount }}">
                 </div>
                 <div class="form-group">
-                    <label for="daysCount">Number of days:</label><input type="number" class="form-control"
-                                                                         id="daysCount" name="daysCount">
+                    <label for="daysCount">Кол-во ходовых дней:</label><input type="number" class="form-control"
+                                                                              id="daysCount" name="daysCount"
+                                                                              value="{{ daysCount }}">
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Generate</button>
             </form>
@@ -61,95 +63,55 @@
     {% if plan %}
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <table class="table">
+                <table class="table table-hover table-striped">
                     <thead>
                     <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
-                            Product
-                        </th>
-                        <th>
-                            Payment Taken
-                        </th>
-                        <th>
-                            Status
-                        </th>
+                        <th/>
+                        {% for day_plan in plan %}
+                            <th>
+                                {{ forloop.counter }} day
+                            </th>
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            01/04/2012
-                        </td>
-                        <td>
-                            Default
-                        </td>
+                        <th>Завтрак</th>
+                        {% for day_plan in plan %}
+                            <td>
+                                {{ day_plan.breakfast.name }}
+                            </td>
+                        {% endfor %}
                     </tr>
-                    <tr class="active">
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            01/04/2012
-                        </td>
-                        <td>
-                            Approved
-                        </td>
+                    <tr>
+                        <th>Обед</th>
+                        {% for day_plan in plan %}
+                            <td>
+                                {{ day_plan.lunch.name }}
+                            </td>
+                        {% endfor %}
                     </tr>
-                    <tr class="success">
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            02/04/2012
-                        </td>
-                        <td>
-                            Declined
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            03/04/2012
-                        </td>
-                        <td>
-                            Pending
-                        </td>
-                    </tr>
-                    <tr class="danger">
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            TB - Monthly
-                        </td>
-                        <td>
-                            04/04/2012
-                        </td>
-                        <td>
-                            Call in to confirm
-                        </td>
+                    <tr>
+                        <th>Ужин</th>
+                        {% for day_plan in plan %}
+                            <td>
+                                {{ day_plan.dinner.name }}
+                            </td>
+                        {% endfor %}
                     </tr>
                     </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Продукты</th>
+                        <th>Вес, г</th>
+                    </tr>
+                    </thead>
                 </table>
             </div>
         </div>
