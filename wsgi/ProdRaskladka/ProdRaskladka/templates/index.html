@@ -69,7 +69,7 @@
                         <th/>
                         {% for day_plan in plan %}
                             <th>
-                                {{ forloop.counter }} day
+                                {{ forloop.counter }} день
                             </th>
                         {% endfor %}
                     </tr>
@@ -112,6 +112,16 @@
                         <th>Вес, г</th>
                     </tr>
                     </thead>
+                    {% for name, amount in summary.items %}
+                        <tr>
+                            <td>
+                                {{ name }}
+                            </td>
+                            <td>
+                                {{ amount }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>

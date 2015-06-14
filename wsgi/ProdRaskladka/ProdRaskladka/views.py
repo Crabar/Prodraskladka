@@ -10,6 +10,7 @@ from .core import *
 def home(request):
     return render(request, 'index.html')
 
+
 def generate(request):
     try:
         people_count = int(request.POST["peopleCount"])
@@ -17,5 +18,6 @@ def generate(request):
     except ValueError:
         return render(request, 'index.html', {'error_message': "You didn't provide all necessary information!"})
 
-    plan = generate_plan(days_count, people_count)
-    return render(request, "index.html", {"plan": plan, "peopleCount": people_count, "daysCount": days_count})
+    result = generate_plan(days_count, people_count)
+    return render(request, "index.html", {"plan": result["plan"], "peopleCount": people_count, "daysCount": days_count,
+                                          "summary": result["summary"]})
