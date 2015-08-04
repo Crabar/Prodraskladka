@@ -1,0 +1,98 @@
+{% load tentacles %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if days_plan %}
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th/>
+                    {% for day_plan in days_plan.plan %}
+                        <th>
+                            {{ forloop.counter }} день
+                        </th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Завтрак</th>
+                    {% for day_plan in days_plan.plan %}
+                        <td>
+                            {% if day_plan %}
+                                <div class="modal-header">
+                                    <form role="form" class="octopus-form" action="{% url 'delete' %}" method="post"
+                                          insert="replace"
+                                          target="footer">
+                                        <input type="hidden" name="deletedElement" value="{{ forloop.counter }}">
+                                        <button type="submit" class="close" aria-hidden="true">×</button>
+                                    </form>
+                                    {{ day_plan.breakfast.name }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Обед</th>
+                    {% for day_plan in days_plan.plan %}
+                        <td>
+                            {% if day_plan %}
+                                <div class="modal-header">
+                                    <form role="form" class="octopus-form" action="{% url 'delete' %}" method="post"
+                                          insert="replace"
+                                          target="footer">
+                                        <input type="hidden" name="deletedElement" value="{{ forloop.counter }}">
+                                        <button type="submit" class="close" aria-hidden="true">×</button>
+                                    </form>
+                                    {{ day_plan.lunch.name }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Ужин</th>
+                    {% for day_plan in days_plan.plan %}
+                        <td>
+                            {% if day_plan %}
+                                <div class="modal-header">
+                                    <form role="form" class="octopus-form" action="{% url 'delete' %}" method="post"
+                                          insert="replace"
+                                          target="footer">
+                                        <input type="hidden" name="deletedElement" value="{{ forloop.counter }}">
+                                        <button type="submit" class="close" aria-hidden="true">×</button>
+                                    </form>
+                                    {{ day_plan.dinner.name }}
+                                </div>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Продукты</th>
+                    <th>Вес, г</th>
+                </tr>
+                </thead>
+                {% for name, amount in days_plan.summary.items %}
+                    <tr>
+                        <td>
+                            {{ name }}
+                        </td>
+                        <td>
+                            {{ amount }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endif %}

@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ProdRaskladka',
     'django_extensions',
-
+    'octopus'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,4 +98,5 @@ _MONGODB_DATABASE_HOST = \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, MONGO_DATABASE_NAME)
 
 from mongoengine import connect
+
 connect(MONGO_DATABASE_NAME, host=_MONGODB_DATABASE_HOST)
